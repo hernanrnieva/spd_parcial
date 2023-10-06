@@ -1,7 +1,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /*
- * Dummy variables to use VSCode without undeclared variable errors.
- * Variables sin uso para poder usar VSCode sin errores de variables no declaradas.
+ * Dummy variables and functions to use IDE without undeclared variable errors.
+ * Variables y funciones sin uso para poder usar IDW sin errores de variables no declaradas.
 */
 #define INPUT_PULLUP 0
 #define OUTPUT 0
