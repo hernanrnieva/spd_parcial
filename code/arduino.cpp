@@ -68,7 +68,7 @@ void setup () {
   printDigit(0);
 }
 
-void loop(){
+void loop() {
   int pressed = press();
   
   if(pressed == UP) {

@@ -21,7 +21,7 @@ El loop standard de arduino recibe las distintas pulsaciones a partir de la func
 En base a la recepción de este valor, aumenta, disminuye, o resetea la cuenta, que luego es impresa por la función printCount():
 
 ~~~ C++
-void loop(){
+void loop() {
   int pressed = press();
   
   if(pressed == UP) {
