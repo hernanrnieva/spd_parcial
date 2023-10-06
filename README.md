@@ -1,57 +1,47 @@
-# Ejemplo Documentación 
-![Tinkercad](./img/ArduinoTinkercad.jpg)
+# SPD - TP1
+![Tinkercad](./img/arduino.jpg)
 
 
 ## Integrantes 
-- Esteban M. Quiroz
-- Dario Cuda 
+- Lionel Prats
+- Hernan Nieva
 
 
 ## Proyecto: Contador binario.
-![Tinkercad](./img/ContadorBinario.png)
+![Tinkercad](./img/binaryCounter.png)
 
 
 ## Descripción
-En este parrafo deberan describir que funcion cumple su proyecto. Que solucion esta ofreciendo.
+En este proyecto se implementa un contador binario haciendo uso de dos displays de 7 segmentos.
+Se usa la técnica de multiplexado para no necesitar más pines de los que ofrece Arduino.
 
-## Función principal
-Esta funcion se encarga de encender y apagar los leds.
+## Loop principal
+El loop standard de arduino recibe las distintas pulsaciones a partir de la función press() (explicada en mayor profundidad con cometarios en el código).
 
-B0, B1, B2, B3 son #define que utilizamos para agregar los leds, asociandolo a pines de la placa arduino.
+En base a la recepción de este valor, aumenta, disminuye, o resetea la cuenta, que luego es impresa por la función printCount():
 
-(Breve explicación de la función)
+~~~ C++
+void loop(){
+  int pressed = press();
+  
+  if(pressed == UP) {
+    countDigit ++;
 
-~~~ C (lenguaje en el que esta escrito)
-void EncenderBinario(int estado3, int estado2,int estado1,int estado0)
-{
-  digitalWrite(B3,estado3);
-  digitalWrite(B2,estado2);
-  digitalWrite(B1,estado1);
-  digitalWrite(B0,estado0);
+    if(countDigit > 99)
+      countDigit = 0;
+
+  } else if(pressed == DOWN) {
+    countDigit --;
+
+    if(countDigit < 0)
+      countDigit = 99;
+
+  } else if(pressed == RESET)
+    countDigit = 0;
+
+  printCount(countDigit);
 }
 ~~~
 
-## :robot: Link al proyecto
-- [proyecto](https://www.tinkercad.com/things/aOYiibnDjWu)
-## :tv: Link al video del proceso
-- [video](https://www.youtube.com/watch?v=VyGjE8kx-O0)
-
----
-### Fuentes
-- [Consejos para documentar](https://www.sohamkamani.com/how-to-write-good-documentation/#architecture-documentation).
-
-- [Lenguaje Markdown](https://markdown.es/sintaxis-markdown/#linkauto).
-
-- [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
-
-- [Tutorial](https://www.youtube.com/watch?v=oxaH9CFpeEE).
-
-- [Emojis](https://gist.github.com/rxaviers/7360908).
-
----
-
-
-
-
-
-
+## :robot: Link al proyecto en Tinkercad
+- [proyecto](https://www.tinkercad.com/things/358hSCJG9fT)
