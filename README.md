@@ -28,8 +28,8 @@ void loop()
   // Acción sobre el pulsador en base a tecla presionada
   if(presionoTecla == SUBE)
   {
-  	contadorNumeros += 1;
-   
+    contadorNumeros += 1;
+
     if(contadorNumeros > 99)
     {
       contadorNumeros = 0;
