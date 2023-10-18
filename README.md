@@ -54,10 +54,9 @@ void loop()
 }
 ~~~
 
-~~~ C++
 La función teclaPresionada() está hecha de tal forma que se evite el rebote del pulsador, es decir, que el mantener apretado el botón no se detecte como varias pulsaciones seguidas.
 Se verifica el estado anterior del pulsador para sólo devolver cuando estuvo presionado y dejó de estarlo:
-
+~~~ C++
 int teclaPresionada(void)
 {
   // Función para detectar la pulsación de botones y gestionar el antirrebote.
