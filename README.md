@@ -26,10 +26,13 @@ void loop()
   int presionoTecla = teclaPresionada();
 
   // Acción sobre el pulsador en base a tecla presionada
-  if(presionoTecla == SUBE)
-  {
-    contadorNumeros += 1;
-
+  if(presionoTecla == SUBE) {
+    if(digitalRead(SW_1) == LOW) {
+      contadorNumeros += 1;
+    } else {
+      contadorNumeros = obtenerPrimo(contadorNumeros + 1, true);
+    }
+   
     if(contadorNumeros > 99)
     {
       contadorNumeros = 0;
@@ -37,7 +40,11 @@ void loop()
   }
   else if(presionoTecla == BAJA)
   {
-    contadorNumeros -= 1;
+    if(digitalRead(SW_1) == LOW) {
+      contadorNumeros -= 1;
+    } else {
+      contadorNumeros = obtenerPrimo(contadorNumeros - 1, false);
+    }
 
     if(contadorNumeros < 0)
     {
@@ -48,6 +55,8 @@ void loop()
   {
      contadorNumeros = 0;
   }
+
+  mostrarNumPrimos = digitalRead(SW_1) == LOW;
   
   // Llamamos a la funcion para el manejo de los display
   controladorDisplay(contadorNumeros);
