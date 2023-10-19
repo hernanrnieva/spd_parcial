@@ -105,4 +105,4 @@ int teclaPresionada(void)
 ~~~
 
 ## :robot: Link al proyecto en Tinkercad
-- [proyecto](https://www.tinkercad.com/things/3Hq4TQANRCd)
+- [proyecto](https://www.tinkercad.com/things/1srGP3t4m9X)

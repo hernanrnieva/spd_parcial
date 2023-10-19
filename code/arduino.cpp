@@ -10,11 +10,12 @@
 #define BAJA 3
 #define RESET 4
 #define DISPLAY_DELAY 25
+#define SW_1 5
 
 // Configuración de pines como entradas o salidas
 void setup()
 {
-  for(int i = 7; i < 14; i++) {
+  for(int i = 3; i < 14; i++) {
     pinMode(i, OUTPUT);
   }
   pinMode(A4, OUTPUT);            // Display 1
@@ -34,6 +35,7 @@ int leerRestar = 0;
 int restarAnterior = 1;
 int sumarAnterior = 1;
 int reiniciarAnterior = 1;
+bool mostrarNumPrimos = false;
   
 void loop()
 {      
@@ -41,9 +43,12 @@ void loop()
   int presionoTecla = teclaPresionada();
 
   // Acción sobre el pulsador en base a tecla presionada
-  if(presionoTecla == SUBE)
-  {
-  	contadorNumeros += 1;
+  if(presionoTecla == SUBE) {
+    if(digitalRead(SW_1) == LOW) {
+      contadorNumeros += 1;
+    } else {
+      contadorNumeros = obtenerPrimo(contadorNumeros + 1, true);
+    }
    
     if(contadorNumeros > 99)
     {
@@ -52,7 +57,11 @@ void loop()
   }
   else if(presionoTecla == BAJA)
   {
-    contadorNumeros -= 1;
+    if(digitalRead(SW_1) == LOW) {
+      contadorNumeros -= 1;
+    } else {
+      contadorNumeros = obtenerPrimo(contadorNumeros - 1, false);
+    }
 
     if(contadorNumeros < 0)
     {
@@ -63,9 +72,49 @@ void loop()
   {
      contadorNumeros = 0;
   }
+
+  mostrarNumPrimos = digitalRead(SW_1) == LOW;
   
   // Llamamos a la funcion para el manejo de los display
   controladorDisplay(contadorNumeros);
+}
+
+int obtenerPrimo(int numero, bool siguiente){
+  while (true){
+    // Busco el siguiente primo
+    if(siguiente) {
+      numero ++;
+      if(numero > 99) {
+        numero = 0;
+      } 
+    }
+
+    // Busco el anterior primo
+    else {
+      numero --;
+      if(numero <= 0) {
+        numero = 99;
+      } 
+    }
+
+    if (numPrimo(numero)){
+      return numero;
+    }
+  }
+}
+
+bool numPrimo(int numero) {
+  if (numero <= 1) {
+    return false;  // Falso (no es primo)
+  }
+    
+  for (int index = 2; index <= numero/2; index++) {
+    if (numero % index == 0) {
+      return false;  // Falso (no es primo)
+    }
+  }
+  
+  return true;  // Verdadero (es primo)
 }
 
 // Control del funcionamiento de los display
@@ -88,7 +137,7 @@ void controladorDisplay(int contadorNumeros)
 
 // Funcion para mostrar los numeros en el display
 void numerosDisplay(int numero){
-  borrar_display();
+  borrarDisplay();
       
   switch(numero) {
   	case 0:
@@ -163,7 +212,7 @@ void numerosDisplay(int numero){
 }
 
 // Apaga todos los segmentos del display
-void borrar_display(){
+void borrarDisplay(){
   digitalWrite(A, LOW); 
 	digitalWrite(B, LOW); 
 	digitalWrite(C, LOW); 
