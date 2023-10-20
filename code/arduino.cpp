@@ -14,7 +14,7 @@
 #define DECENAS A5
 #define SWITCH 5
 #define TEMPERATURA A2
-#define TEMPERATURA_MINIMA 185
+#define TEMPERATURA_MINIMA 70
 #define FUERZA A3
 #define PRIMER_INCREMENTO 385
 #define SEGUNDO_INCREMENTO 165
@@ -138,8 +138,9 @@ bool numPrimo(int numero) {
 
 // Control del funcionamiento de los display
 void controladorDisplay(int contadorNumeros) {
-  float temperatura = analogRead(TEMPERATURA);
-    
+  float lecturaTemperatura = analogRead(TEMPERATURA);
+  float temperatura = map(lecturaTemperatura, 20, 350, -40, 125); 
+  
   if(temperatura > TEMPERATURA_MINIMA) {
     // Sacar las unidades y decenas del contador
     int unidades = contadorNumeros % 10;
