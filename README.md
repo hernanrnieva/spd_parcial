@@ -121,5 +121,10 @@ En el proyecto, el componente fue abarcado para el uso del display.  Si el senso
 El sensor de fuerza es un dispositivo con el cual se puede medir una fuerza proporcional a la presión generada sobre el sensor.
 En el proyecto, el dispositivo fue abarcado para el uso del contador, mediante el cual según la fuerza ejercida en el sensor cambia la velocidad a la que se suman o restan los números en el contador.
 
+## Parte 3
+
+Se añade un componente de luz ambiental.  
+Este componente afectará al comportamiento del circuito de forma similar al sensor de temperatura. Si el sensor detecta una cierta cantidad de luz natural dejará de mostrar los números. Siempre debe mantenerse la luz baja.
+
 ## :robot: Link al proyecto en Tinkercad
 - [proyecto](https://www.tinkercad.com/things/1srGP3t4m9X)

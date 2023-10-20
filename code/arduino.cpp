@@ -21,12 +21,21 @@
 #define SIGUIENTE true
 #define ANTERIOR false
 
+/****** Inicio funcionalidad parte 3 ******/
+#define LUZ_AMBIENTAL A1
+#define LUZ_AMBIENTAL_MAXIMA 50
+/****** Fin funcionalidad parte 3 ******/
+
 // Configuración de pines como entradas o salidas
 void setup() {
   for(int i = 3; i < 14; i++) {
     pinMode(i, OUTPUT);
   }
-
+  
+  /****** Inicio funcionalidad parte 3 ******/
+  pinMode(LUZ_AMBIENTAL, INPUT);
+  /****** Fin funcionalidad parte 3 ******/
+  
   pinMode(TEMPERATURA, INPUT);
   pinMode(FUERZA, INPUT);
   pinMode(UNIDADES, OUTPUT);            // Display 1
@@ -139,9 +148,17 @@ bool numPrimo(int numero) {
 // Control del funcionamiento de los display
 void controladorDisplay(int contadorNumeros) {
   float lecturaTemperatura = analogRead(TEMPERATURA);
-  float temperatura = map(lecturaTemperatura, 20, 350, -40, 125); 
+  float temperatura = map(lecturaTemperatura, 20, 350, -40, 125);
   
-  if(temperatura > TEMPERATURA_MINIMA) {
+  /****** Inicio funcionalidad parte 3 ******/
+  float lecturaLuzAmbiental = analogRead(LUZ_AMBIENTAL);
+  float luzAmbiental = map(lecturaLuzAmbiental, 538, 1023, 100, 1);
+  /****** Fin funcionalidad parte 3 ******/
+  
+  /****** Inicio funcionalidad parte 3 ******/
+  // if(temperatura > TEMPERATURA_MINIMA) {
+  if(temperatura > TEMPERATURA_MINIMA && luzAmbiental < LUZ_AMBIENTAL_MAXIMA) {
+  /****** Fin funcionalidad parte 3 ******/
     // Sacar las unidades y decenas del contador
     int unidades = contadorNumeros % 10;
     int decenas = contadorNumeros / 10;
