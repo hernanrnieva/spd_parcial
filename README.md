@@ -127,6 +127,11 @@ Para el proyecto, el involucrar alguno de estos motores podría traer algunas cu
 
 ### Sensores
 ![Motors](./img/sensors.png)
+Los sensores son entradas análogicas que, a diferencia de las digitales, devuelven valores que oscilan entre ciertos valores, particularmente entre 0 y 1023.
+En el proyecto se han usado puntualmente para:
+
+- Temperatura: definir si se muestra o no el contador en base a una temperatura mínima.
+- Fuerza: definir la cantidad de números a aumentar en el contador en base a la fuerza que se ejerce sobre el sensor.
 
 ## :robot: Link al proyecto en Tinkercad
 - [proyecto](https://www.tinkercad.com/things/1srGP3t4m9X)
