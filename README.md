@@ -128,7 +128,7 @@ Para el proyecto, el involucrar alguno de estos motores podría traer algunas cu
 - Hacer un contador que aumente o disminuya sin necesidad de apretar botón alguno sino que sólo en base al sentido de giro y luego de determinado tiempo.
 
 ### Sensores
-![Motors](./img/sensors.png)
+![Motors](./img/sensors.png)  
 
 Los sensores son entradas análogicas que, a diferencia de las digitales, devuelven valores que oscilan entre ciertos valores, particularmente entre 0 y 1023.
 En el proyecto se han usado puntualmente para:
