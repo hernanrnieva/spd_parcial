@@ -12,53 +12,41 @@
 
 
 ## Descripción
-En este proyecto se implementa un contador binario haciendo uso de dos displays de 7 segmentos. Se usa la técnica de multiplexado para no necesitar más pines de los que ofrece Arduino.
-Se harán uso de dos pulsadores que aumentarán, disminuirán, o resetearan el contador el pantalla. Este último tiene dos modos, uno exclusivo de números primos, y el otro, de todos los números naturales del 0 al 99.
-Los números aparecerán sólo si el sensor de temperatura supera los 70C.
-Existe la posibilidad de incrementar la cantidad de números que se avanza manipulando el sensor de fuerza.
+En este proyecto se implementa un contador binario haciendo uso de dos displays de 7 segmentos. Se usa la técnica de multiplexado para no necesitar más pines de los que ofrece Arduino.  
+Se harán uso de tres pulsadores que aumentarán, disminuirán, o resetearan el contador el pantalla. Este último tiene dos modos, uno exclusivo de números primos, y el otro, de todos los números naturales del 0 al 99.  
+Los números aparecerán sólo si el sensor de temperatura supera los 70C.  
+Existe la posibilidad de incrementar la cantidad de números que se avanza manipulando el sensor de fuerza.  
 
 ## Funcionalidad relevante
 ### Loop principal
 El loop standard de arduino recibe las distintas pulsaciones a partir de la función teclaPresionada(). En base a la recepción de este valor, aumenta, disminuye, o resetea la cuenta, que luego es impresa por la función controladorDisplay():
 
 ~~~ C++
-void loop()
-{      
+void loop() {      
   // Ejecucion del antirrebote
-  int presionoTecla = teclaPresionada();
+  int presionoTecla = teclaPresionada(); 
+  int incremento = definirIncremento(analogRead(FUERZA));
+  mostrarNumPrimos = digitalRead(SWITCH) == LOW;
 
   // Acción sobre el pulsador en base a tecla presionada
   if(presionoTecla == SUBE) {
-    if(digitalRead(SW_1) == LOW) {
-      contadorNumeros += 1;
-    } else {
-      contadorNumeros = obtenerPrimo(contadorNumeros + 1, true);
-    }
+    if(digitalRead(SWITCH) == LOW)
+      contadorNumeros += 1 * incremento;
+    else
+      contadorNumeros = obtenerPrimo(contadorNumeros, SIGUIENTE, incremento);
    
     if(contadorNumeros > 99)
-    {
       contadorNumeros = 0;
-    }
-  }
-  else if(presionoTecla == BAJA)
-  {
-    if(digitalRead(SW_1) == LOW) {
-      contadorNumeros -= 1;
-    } else {
-      contadorNumeros = obtenerPrimo(contadorNumeros - 1, false);
-    }
+  } else if(presionoTecla == BAJA) {
+    if(digitalRead(SWITCH) == LOW)
+      contadorNumeros -= 1 * incremento;
+    else
+      contadorNumeros = obtenerPrimo(contadorNumeros, ANTERIOR, incremento);
 
     if(contadorNumeros < 0)
-    {
       contadorNumeros = 99;
-    }
-  }
-  else if(presionoTecla == RESET)
-  {
+  } else if(presionoTecla == RESET)
      contadorNumeros = 0;
-  }
-
-  mostrarNumPrimos = digitalRead(SW_1) == LOW;
   
   // Llamamos a la funcion para el manejo de los display
   controladorDisplay(contadorNumeros);
@@ -69,8 +57,7 @@ void loop()
 La función teclaPresionada() está hecha de tal forma que se evite el rebote del pulsador, es decir, que el mantener apretado el botón no se detecte como varias pulsaciones seguidas. Se verifica el estado anterior del pulsador para sólo devolver cuando estuvo presionado y dejó de estarlo:
 
 ~~~ C++
-int teclaPresionada(void)
-{
+int teclaPresionada(void) {
   // Función para detectar la pulsación de botones y gestionar el antirrebote.
   // Devuelve SUBE, BAJA o RESET en caso de pulsación o 0 en caso contrario.
   leerReiniciar = digitalRead(RESET);
@@ -78,35 +65,26 @@ int teclaPresionada(void)
   leerRestar = digitalRead(BAJA);
   
   if(leerSumar == 1)
-  {
     sumarAnterior = 1;
-  }
   
   if(leerRestar  == 1)
-  {
     restarAnterior = 1;
-  }
 
   if(leerReiniciar  == 1)
-  {
     reiniciarAnterior = 1;
-  }
   
   // ANTIRREBOTE 
-  if(leerSumar == 0 && leerSumar != sumarAnterior)
-  {
+  if(leerSumar == 0 && leerSumar != sumarAnterior) {
   	sumarAnterior = leerSumar;
     return SUBE;
   }
   
-  if(leerRestar == 0 && leerRestar != restarAnterior)
-  {
+  if(leerRestar == 0 && leerRestar != restarAnterior) {
   	restarAnterior = leerRestar;
     return BAJA;
   }
   
-  if(leerReiniciar == 0 && leerReiniciar != reiniciarAnterior)
-  {
+  if(leerReiniciar == 0 && leerReiniciar != reiniciarAnterior) {
   	reiniciarAnterior = leerReiniciar;
     return RESET;
   }
