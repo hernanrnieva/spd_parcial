@@ -1,4 +1,4 @@
-# SPD - TP1
+# SPD - Parcial
 ![Tinkercad](./img/arduino.jpg)
 
 
@@ -12,12 +12,14 @@
 
 
 ## Descripción
-En este proyecto se implementa un contador binario haciendo uso de dos displays de 7 segmentos.
-Se usa la técnica de multiplexado para no necesitar más pines de los que ofrece Arduino.
+En este proyecto se implementa un contador binario haciendo uso de dos displays de 7 segmentos. Se usa la técnica de multiplexado para no necesitar más pines de los que ofrece Arduino.
+Se harán uso de dos pulsadores que aumentarán, disminuirán, o resetearan el contador el pantalla. Este último tiene dos modos, uno exclusivo de números primos, y el otro, de todos los números naturales del 0 al 99.
+Los números aparecerán sólo si el sensor de temperatura supera los 70C.
+Existe la posibilidad de incrementar la cantidad de números que se avanza manipulando el sensor de fuerza.
 
-## Loop principal
-El loop standard de arduino recibe las distintas pulsaciones a partir de la función teclaPresionada().
-En base a la recepción de este valor, aumenta, disminuye, o resetea la cuenta, que luego es impresa por la función controladorDisplay():
+## Funcionalidad relevante
+### Loop principal
+El loop standard de arduino recibe las distintas pulsaciones a partir de la función teclaPresionada(). En base a la recepción de este valor, aumenta, disminuye, o resetea la cuenta, que luego es impresa por la función controladorDisplay():
 
 ~~~ C++
 void loop()
@@ -63,8 +65,9 @@ void loop()
 }
 ~~~
 
-La función teclaPresionada() está hecha de tal forma que se evite el rebote del pulsador, es decir, que el mantener apretado el botón no se detecte como varias pulsaciones seguidas.
-Se verifica el estado anterior del pulsador para sólo devolver cuando estuvo presionado y dejó de estarlo:
+### Presión de pulsador
+La función teclaPresionada() está hecha de tal forma que se evite el rebote del pulsador, es decir, que el mantener apretado el botón no se detecte como varias pulsaciones seguidas. Se verifica el estado anterior del pulsador para sólo devolver cuando estuvo presionado y dejó de estarlo:
+
 ~~~ C++
 int teclaPresionada(void)
 {
@@ -112,6 +115,18 @@ int teclaPresionada(void)
   return 0;
 }
 ~~~
+
+## Otros componentes
+### Motores
+![Motors](./img/motors.png)
+Los motores tienen la capacidad de convertir la energía eléctrica en mecánica. Esto hace que se provoque un movimiento rotatorio, por la acción de un campo magnético.
+Para el proyecto, el involucrar alguno de estos motores podría traer algunas cuestiones visuales llamativas. Por ejemplo:
+
+- Reemplazar un botón por otro que cambie el sentido de giro del motor, y que otro botón sirva para aumentar o disminuir el contador, pero en base al giro del motor.
+- Hacer un contador que aumente o disminuya sin necesidad de apretar botón alguno sino que sólo en base al sentido de giro y luego de determinado tiempo.
+
+### Sensores
+![Motors](./img/sensors.png)
 
 ## :robot: Link al proyecto en Tinkercad
 - [proyecto](https://www.tinkercad.com/things/1srGP3t4m9X)
