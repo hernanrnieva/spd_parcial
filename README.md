@@ -130,8 +130,13 @@ Para el proyecto, el involucrar alguno de estos motores podría traer algunas cu
 Los sensores son entradas análogicas que, a diferencia de las digitales, devuelven valores que oscilan entre ciertos valores, particularmente entre 0 y 1023.
 En el proyecto se han usado puntualmente para:
 
-- Temperatura: definir si se muestra o no el contador en base a una temperatura mínima.
-- Fuerza: definir la cantidad de números a aumentar en el contador en base a la fuerza que se ejerce sobre el sensor.
+#### Temperatura
+El TMP36 (componente analógico) es un sensor de temperatura que proporciona una lectura en grados centígrados de precisión y de bajo voltaje. Su rango de temperatura ronda entre -40 C a +125°C, con una precisión de ±1°C. El mismo cuenta con tres patitas para la conexión: la primera, empezando desde la izquierda, es la alimentación (5V), la del medio es la salida y la última es el pin GND.
+En el proyecto, el componente fue abarcado para el uso del display.  Si el sensor está a cierta temperatura, el display se va a prender y recién ahí se va a poder ver el contador en el display, caso contrario el display no va a prender.
+
+#### Fuerza
+El sensor de fuerza es un dispositivo con el cual se puede medir una fuerza proporcional a la presión generada sobre el sensor.
+En el proyecto, el dispositivo fue abarcado para el uso del contador, mediante el cual según la fuerza ejercida en el sensor cambia la velocidad a la que se suman o restan los números en el contador.
 
 ## :robot: Link al proyecto en Tinkercad
 - [proyecto](https://www.tinkercad.com/things/1srGP3t4m9X)
