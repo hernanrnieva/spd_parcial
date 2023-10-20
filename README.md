@@ -122,4 +122,4 @@ El sensor de fuerza es un dispositivo con el cual se puede medir una fuerza prop
 En el proyecto, el dispositivo fue abarcado para el uso del contador, mediante el cual según la fuerza ejercida en el sensor cambia la velocidad a la que se suman o restan los números en el contador.
 
 ## :robot: Link al proyecto en Tinkercad
-- [proyecto](https://www.tinkercad.com/things/1srGP3t4m9X)
+- [proyecto](https://www.tinkercad.com/things/1srGP3t4m9X) Prueba
